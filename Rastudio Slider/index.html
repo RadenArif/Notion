@@ -49,6 +49,15 @@
       opacity: 1;
     }
 
+    .buttons {
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .slider.show-arrows .buttons {
+      opacity: 1;
+    }
+
     .buttons button {
       position: absolute;
       top: 50%;
@@ -172,6 +181,18 @@
     if (auto) {
       slideInterval = setInterval(nextSlide, intervalTime);
     }
+
+    // Arrow visibility handling
+    let timeoutId;
+
+    document.addEventListener("mousemove", () => {
+      slider.classList.add("show-arrows");
+
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(() => {
+        slider.classList.remove("show-arrows");
+      }, 2000); // 2 seconds of inactivity before hiding the arrows
+    });
   </script>
 </body>
 
